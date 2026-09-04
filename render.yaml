@@ -19,11 +19,9 @@ services:
       - key: HISTORY_ENABLED
         value: true
       - key: DB_PATH
-        value: /var/data/fleet_history.db
-    disk:
-      name: fleet-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: /fleet_history.db
+   
+    
 
   - type: worker
     name: peppermint-fleet-simulator
