@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Peppermint Fleet Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Peppermint&nbsp;<span>Fleet</span></div>
+    <div class="conn-status" id="connStatus">connecting…</div>
+    <div class="fleet-count" id="fleetCount">– robots</div>
+    <button class="admin-toggle" id="adminToggle">Admin</button>
+  </header>
+
+  <section class="admin-panel" id="adminPanel" hidden>
+    <div class="admin-row">
+      <label>Admin token <input id="adminToken" type="password" placeholder="x-admin-token" /></label>
+      <label>Fleet size <input id="cfgFleetSize" type="number" min="1" max="20000" /></label>
+      <label>Update interval (ms) <input id="cfgInterval" type="number" min="100" max="60000" /></label>
+      <label>Payload padding (bytes) <input id="cfgPadding" type="number" min="0" max="200000" /></label>
+      <button id="cfgApply">Apply live</button>
+      <span class="admin-msg" id="adminMsg"></span>
+    </div>
+  </section>
+
+  <main class="layout">
+    <section class="panel map-panel">
+      <div class="panel-head">
+        <h2>Site</h2>
+        <div class="legend" id="legend"></div>
+      </div>
+      <canvas id="siteCanvas" width="900" height="560"></canvas>
+    </section>
+
+    <section class="panel trend-panel">
+      <div class="panel-head">
+        <h2>Fleet activity over time</h2>
+        <div class="window-controls" id="windowControls">
+          <button data-window="60000">1m</button>
+          <button data-window="300000" class="active">5m</button>
+          <button data-window="900000">15m</button>
+          <button data-window="3600000">1h</button>
+          <button data-window="0">All</button>
+        </div>
+      </div>
+      <canvas id="trendCanvas" width="900" height="220"></canvas>
+    </section>
+
+    <section class="panel list-panel">
+      <div class="panel-head">
+        <h2>Robots</h2>
+        <div class="list-controls">
+          <input id="searchBox" type="text" placeholder="Search id / type / status…" />
+          <label class="attention-toggle"><input id="attentionOnly" type="checkbox" /> Needs attention only</label>
+        </div>
+      </div>
+      <div class="table-wrap" id="tableWrap">
+        <div class="table-header-row">
+          <span>ID</span><span>Type</span><span>Status</span><span>Battery</span><span>Pos</span><span>Last update</span>
+        </div>
+        <div class="table-body" id="tableBody"></div>
+      </div>
+    </section>
+
+    <aside class="panel detail-panel" id="detailPanel">
+      <h2>Select a robot</h2>
+      <p class="hint">Click any row, or a dot on the map, to inspect a robot here.</p>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
