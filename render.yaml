@@ -5,10 +5,9 @@
 services:
   - type: web
     name: peppermint-fleet-backend
-    env: node
+    env: docker
     plan: free
-    buildCommand: npm install
-    startCommand: node server.js
+   
     envVars:
       - key: ADMIN_TOKEN
         generateValue: true
