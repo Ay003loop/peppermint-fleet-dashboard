@@ -1,0 +1,51 @@
+# Render.com blueprint (render.com/docs/blueprint-spec). Push this repo, then
+# "New +" -> "Blueprint" on Render and point it at the repo; it will create
+# both services below. Free-tier web services on Render sleep after inactivity,
+# so the first request after idle has a cold-start delay -- noted in README.md.
+services:
+  - type: web
+    name: peppermint-fleet-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: FLEET_SIZE
+        value: 25
+      - key: UPDATE_INTERVAL_MS
+        value: 5000
+      - key: HISTORY_ENABLED
+        value: true
+      - key: DB_PATH
+        value: /var/data/fleet_history.db
+    disk:
+      name: fleet-data
+      mountPath: /var/data
+      sizeGB: 1
+
+  - type: worker
+    name: peppermint-fleet-simulator
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node simulator.js
+    envVars:
+      - key: BACKEND_INGEST_URL
+        fromService:
+          name: peppermint-fleet-backend
+          type: web
+          property: host
+        # Render gives you a host, not a full ws:// URL -- see README.md for
+        # the one-line fix (set this env var manually to
+        # wss://<backend-service>.onrender.com/ingest after first deploy).
+      - key: BACKEND_HTTP_URL
+        fromService:
+          name: peppermint-fleet-backend
+          type: web
+          property: host
+      - key: FLEET_SIZE
+        value: 25
+      - key: UPDATE_INTERVAL_MS
+        value: 5000
