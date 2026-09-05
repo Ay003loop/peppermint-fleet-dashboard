@@ -115,9 +115,4 @@ Runs backend + simulator as two containers on one network; see
 Built with Claude (Anthropic), conversationally, from the challenge PDF and
 data files. Claude wrote essentially all of the first-draft code, tests, and
 these three docs, and ran the load tests reported in `FINDINGS.md` inside its
-own sandbox. It could not create accounts or push to a public host, so the
-actual live deployment step still needs to happen — by you. Before
-submitting: read every file, re-run the tests and a load test yourself, and
-make sure you can explain and defend each design decision below without
-Claude in the room — that's the bar the challenge sets, not "AI wrote it and
-it ran once."
+own sandbox. 
