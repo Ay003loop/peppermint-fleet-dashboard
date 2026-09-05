@@ -1,7 +1,17 @@
+  const ttp = require('http');
+  const port = process.env.PORT || 3000;
+http.createServer((req,res)=>{
+  res.writeHead(200,{'Content-Type' : 'text/plain'});
+  res.end('Simulator Alive\n');
+}).listen(port,() => {
+  console.log('Server listening on port ${port}');
+});
+
 // Simulates a fleet of warehouse robots and publishes their telemetry to the
 // backend's /ingest websocket, in the exact record shape events.jsonl uses.
 // This is a standalone process on purpose (producer/consumer split): kill it,
 // restart it, or run several of them, and the backend doesn't care.
+
 
 const WebSocket = require('ws');
 const fs = require('fs');
