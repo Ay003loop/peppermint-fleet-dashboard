@@ -18,4 +18,4 @@ EXPOSE 8080
 # and README.md) -- keeping them as separate containers matches the
 # producer/consumer split the challenge asks for and means either can restart
 # independently.
-CMD ["node", "simulator.js"]
+CMD ["node", "server.js"]
