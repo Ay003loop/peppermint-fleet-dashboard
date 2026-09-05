@@ -113,6 +113,6 @@ Runs backend + simulator as two containers on one network; see
 ## AI delegation
 
 Built with Claude (Anthropic), conversationally, from the challenge PDF and
-data files. Claude wrote essentially all of the first-draft code, tests, and
+data files. Claude wrote essentially most of the first-draft code, tests, and
 these three docs, and ran the load tests reported in `FINDINGS.md` inside its
 own sandbox. 
