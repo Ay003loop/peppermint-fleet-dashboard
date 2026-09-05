@@ -7,4 +7,4 @@ COPY . .
 ENV PORT=10000
 EXPOSE 10000
 
-CMD [" node" , " simulator.js"]
+CMD  node  simulator.js
