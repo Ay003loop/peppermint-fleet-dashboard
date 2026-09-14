@@ -193,8 +193,9 @@ server.on('upgrade', (req, socket, head) => {
   }
 });
 
-server.listen(cfg.port, () => {
-  console.log(`[server] listening on :${cfg.port}`);
+
+ server.listen(process.env.PORT || cfg.port , "0.0.0.0" ,() =>{
+   console.log('[server] listening on: ${cfg.port}' );
   console.log(`[server] dashboard   http://localhost:${cfg.port}/`);
   console.log(`[server] ingest ws   ws://localhost:${cfg.port}/ingest`);
   console.log(`[server] stream ws   ws://localhost:${cfg.port}/stream`);
